@@ -2,6 +2,7 @@
 package slitclient.view;
 
 import Data.BrukerData;
+import Data.ModulData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,35 +14,40 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import slitclient.manager.BrukerManager;
+import slitclient.manager.ModulManager;
 
 
 public class foreleserController {
-    
     @FXML
     private Button leggTilModulBtn;
-    
     @FXML
     private TextField modulNavn;
     
     @FXML
     private Button submitModulBtn;
-    @FXML
     public Label labelModulNavn;
-    @FXML
     public Button tilStudentButton;
-    @FXML
     public ListView deltakereList;
-    @FXML
     private Button tilbakeLogInn;
     @FXML
-    private ListView<String> MainListView;
-    
+    private AnchorPane page;
+    @FXML
+    private TextField modulNummer;
+    @FXML
+    private DatePicker datoFelt;
+    @FXML
+    private TextField lagdAv;
+    @FXML
+    private TextArea innhold;
     @FXML
     public void leggTilModul(ActionEvent e) throws IOException { //åpner vindu for å legge til ny modul
         
@@ -65,16 +71,21 @@ public class foreleserController {
  }   
         @FXML //laster opp modul - sjekker om textfield har innhold
         public void submitModul(ActionEvent e) {
-            if(e.getSource() == submitModulBtn && modulNavn.getText() != null) {
+            if(e.getSource() == submitModulBtn && modulNummer.getText() != null) {
             
-              
+              ModulData modulEn = new ModulData ();
+              modulEn.setModul_nummer(Integer.valueOf(modulNummer.getText()));
+              modulEn.setLagd_av(lagdAv.getText());
+              modulEn.setFrist(java.sql.Date.valueOf(datoFelt.getValue()));
+              modulEn.setInnhold(innhold.getText());
+              ModulManager mm  = new ModulManager();
+              mm.storeModul(modulEn);
             }
             else {
             
             }
         }
         
-        @FXML
         public void tilStudentUI(ActionEvent e) throws IOException {
             if(e.getSource() == tilStudentButton) {
            Stage stage3 = (Stage) tilStudentButton.getScene().getWindow();
@@ -85,7 +96,6 @@ public class foreleserController {
            stage3.show();
         }
         }
-        @FXML
         public void tilLogInn(ActionEvent e) throws IOException {
             if(e.getSource() == tilbakeLogInn) {
            Stage stage3 = (Stage) tilbakeLogInn.getScene().getWindow();

@@ -5,6 +5,8 @@
  */
 package Data;
 
+import java.util.Date;
+
 /**
  *
  * @author Erikdjon
@@ -15,13 +17,15 @@ public class ModulData implements java.io.Serializable {
    
     private String lagd_av;
     
-    private String frist;
+    private Date frist;
+    
+    private String innhold;
     
     private int link_id;
     
     private boolean varsel;
     
-    private String innhold;
+    
 
     public int getModul_nummer() {
         return modul_nummer;
@@ -39,11 +43,11 @@ public class ModulData implements java.io.Serializable {
         this.lagd_av = lagd_av;
     }
 
-    public String getFrist() {
+    public Date getFrist() {
         return frist;
     }
 
-    public void setFrist(String frist) {
+    public void setFrist(Date frist) {
         this.frist = frist;
     }
 

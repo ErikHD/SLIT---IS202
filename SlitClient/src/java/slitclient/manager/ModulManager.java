@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package slitclient.manager;
-
+import Data.ModulData;
 import Server.ModulSessionBeanRemote;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,5 +27,8 @@ public class ModulManager {
             throw new RuntimeException(ne);
         }
     }
-    
+    public boolean storeModul(ModulData modulEn) {
+        
+        return this.lookupModulSessionBeanRemote().storeModul(modulEn);
+    }
 }

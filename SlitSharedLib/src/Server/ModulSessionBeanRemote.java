@@ -5,6 +5,8 @@
  */
 package Server;
 
+import Data.ModulData;
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -13,5 +15,12 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ModulSessionBeanRemote {
+       ModulData getModul(int modul_nummer);
+    
+    List<ModulData> getAllModules();
+    
+    boolean storeModul(ModulData modulEn);
+    
+    
     
 }
