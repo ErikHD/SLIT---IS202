@@ -30,16 +30,12 @@ public class foreleserController {
     @FXML
     private Button leggTilModulBtn;
     @FXML
-    private TextField modulNavn;
-    
-    @FXML
     private Button submitModulBtn;
     public Label labelModulNavn;
     public Button tilStudentButton;
     public ListView deltakereList;
-    private Button tilbakeLogInn;
     @FXML
-    private AnchorPane page;
+    private Button tilbakeLogInn;
     @FXML
     private TextField modulNummer;
     @FXML
@@ -48,6 +44,18 @@ public class foreleserController {
     private TextField lagdAv;
     @FXML
     private TextArea innhold;
+    @FXML
+    private TextField brukerIDfelt;
+    @FXML
+    private TextField fornavnFelt;
+    @FXML
+    private TextField etternavnFelt;
+    @FXML
+    private TextField epostFelt;
+    @FXML
+    private ListView<?> listModulEn;
+    @FXML
+    private Button submitBrukerBtn;
     @FXML
     public void leggTilModul(ActionEvent e) throws IOException { //åpner vindu for å legge til ny modul
         
@@ -69,8 +77,7 @@ public class foreleserController {
            
     }
  }   
-        @FXML //laster opp modul - sjekker om textfield har innhold
-        public void submitModul(ActionEvent e) {
+      @FXML       public void submitModul(ActionEvent e) {
             if(e.getSource() == submitModulBtn && modulNummer.getText() != null) {
             
               ModulData modulEn = new ModulData ();
@@ -85,7 +92,25 @@ public class foreleserController {
             
             }
         }
+    @FXML
+    private void SubmitBruker(ActionEvent e) {
+    if(e.getSource() == submitBrukerBtn && fornavnFelt.getText() != null)
+        {
+         BrukerData brukerEn = new BrukerData ();
+              brukerEn.setID(Integer.valueOf(brukerIDfelt.getText()));
+              brukerEn.setFornavn(fornavnFelt.getText());
+              brukerEn.setEtternavn(etternavnFelt.getText());
+              brukerEn.setEpost(epostFelt.getText());
+              brukerEn.setPassword(fornavnFelt.getText() + "123");
+              BrukerManager bm  = new BrukerManager();
+              bm.storeBruker(brukerEn);   
+        }
+    else    {
+    
+    }
+    }
         
+    @FXML
         public void tilStudentUI(ActionEvent e) throws IOException {
             if(e.getSource() == tilStudentButton) {
            Stage stage3 = (Stage) tilStudentButton.getScene().getWindow();
@@ -96,6 +121,7 @@ public class foreleserController {
            stage3.show();
         }
         }
+    @FXML
         public void tilLogInn(ActionEvent e) throws IOException {
             if(e.getSource() == tilbakeLogInn) {
            Stage stage3 = (Stage) tilbakeLogInn.getScene().getWindow();
@@ -118,6 +144,8 @@ public class foreleserController {
                  items.add(b.getEpost());
         }
         */
+
+    
         
         
 }

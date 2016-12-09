@@ -28,7 +28,7 @@
                         <Insets left="23.0" />
                      </padding>
                   </ToolBar>
-                  <ListView fx:id="deltakereList" layoutX="24.0" layoutY="56.0" prefHeight="460.0" prefWidth="435.0" />
+                  <ListView fx:id="deltakereList" layoutX="24.0" layoutY="56.0" prefHeight="460.0" prefWidth="259.0" />
                   <Label layoutX="24.0" layoutY="24.0" text="Deltakere">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -46,6 +46,16 @@
                   </Label>
                   <Label layoutX="518.0" layoutY="74.0" text="Modul 1" />
                   <Label layoutX="653.0" layoutY="74.0" text="75 %" />
+                  <TextField fx:id="brukerIDfelt" layoutX="416.0" layoutY="123.0" />
+                  <TextField fx:id="fornavnFelt" layoutX="416.0" layoutY="179.0" />
+                  <TextField fx:id="etternavnFelt" layoutX="416.0" layoutY="238.0" />
+                  <TextField fx:id="epostFelt" layoutX="416.0" layoutY="297.0" />
+                  <Button fx:id="submitBrukerBtn" layoutX="416.0" layoutY="382.0" mnemonicParsing="false" onAction="#SubmitBruker" text="Legg til Student" />
+                  <Label layoutX="339.0" layoutY="127.0" text="Bruker ID" />
+                  <Label layoutX="342.0" layoutY="183.0" text="Fornavn" />
+                  <Label layoutX="342.0" layoutY="242.0" text="Etternavn" />
+                  <Label text="Label" />
+                  <Label layoutX="349.0" layoutY="301.0" text="Epost" />
                </children></AnchorPane>
       </content>
     </Tab>
