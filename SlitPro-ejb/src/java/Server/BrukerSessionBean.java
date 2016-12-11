@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Server;
 
 import Data.BrukerData;
@@ -11,13 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Edvin
- */
+
 @Stateless
 public class BrukerSessionBean implements BrukerSessionBeanRemote {
 
@@ -31,11 +24,11 @@ public class BrukerSessionBean implements BrukerSessionBeanRemote {
         return bruker.getFornavn();
     }
 
-    public void persist(Object object) {
+    public void persist(Object object) { //kan fjernes
         em.persist(object);
     }
     
-    @Override
+        @Override
         public BrukerData getBruker(int id) {
         Bruker bruker = em.find(Bruker.class, id);
         
@@ -43,7 +36,7 @@ public class BrukerSessionBean implements BrukerSessionBeanRemote {
     }
     
         @Override
-        public List<BrukerData> getAllUsers() {
+        public List<BrukerData> getBrukere() {
             
             List<BrukerData> brukerListe = new ArrayList<BrukerData>();
             
@@ -107,24 +100,51 @@ public class BrukerSessionBean implements BrukerSessionBeanRemote {
       
       @Override
       public BrukerData logInnBruker(String epost, String password) {
-          BrukerData li = new BrukerData();
+          BrukerData bd = new BrukerData();
           
           try {
               Query q = em.createNamedQuery("Bruker.login", Bruker.class);
               
-              q.setParameter("epost", epost);
+              q.setParameter("epost", epost);   
               q.setParameter("password", password);
               
               Bruker b = (Bruker)q.getSingleResult();
               
-              li = this.convertBruker(b);
+              bd = this.convertBruker(b);
           }
           catch(Exception e) {
               e.printStackTrace();
           }
-            return li;
-      }
+            return bd;
+ 
+              
+          }
       
+      @Override
+      public BrukerData deleteBruker(int brukerId) {
+          
+          BrukerData bd = new BrukerData();
+          Query q = em.createNamedQuery("Bruker.delete", Bruker.class);
+          q.setParameter("id", brukerId);
+          
+          q.executeUpdate();
+          
+          return bd;
+           
+      }
+      @Override
+      public BrukerData deleteBrukere() {
+          
+          BrukerData bd = new BrukerData();
+          Query q = em.createNamedQuery("Bruker.deleteAll", Bruker.class);
+          
+          q.executeUpdate();
+          
+          return bd;   
+      }
      
+          
+      
     
+           
 }

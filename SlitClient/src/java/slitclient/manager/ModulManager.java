@@ -6,6 +6,7 @@
 package slitclient.manager;
 import Data.ModulData;
 import Server.ModulSessionBeanRemote;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -26,7 +27,19 @@ public class ModulManager {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
+        
     }
+    
+    public ModulData getModul(int id)
+    {
+        return this.lookupModulSessionBeanRemote().getModul(id);
+            
+    }
+    
+    public List<ModulData> getAllModules() {
+        return this.lookupModulSessionBeanRemote().getAllModules();
+    }
+    
     public boolean storeModul(ModulData modulEn) {
         
         return this.lookupModulSessionBeanRemote().storeModul(modulEn);
